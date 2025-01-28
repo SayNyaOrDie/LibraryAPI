@@ -3,8 +3,6 @@ using WebApplication3.Exceptions;
 using WebApplication3.Services.Interfaces;
 using WebApplication3.Data;
 using WebApplication3.Models;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 public class BookService : IBookService
 {
@@ -55,8 +53,7 @@ public class BookService : IBookService
 
     public void UpdateBookDetails(int id, Book updatedBook)
     {
-        var existingBook = _context.Books.FirstOrDefault(b => b.Id == id) ??
-            throw new LibraryException($"Book with ID {id} not found");
+        var existingBook = GetBookById(id);
 
         if (string.IsNullOrWhiteSpace(updatedBook.Author.Name) ||
             string.IsNullOrWhiteSpace(updatedBook.Author.Surname))
@@ -66,10 +63,10 @@ public class BookService : IBookService
             throw new LibraryException("Price must be greater than zero");
 
         if (updatedBook.PublishDate == default)
-            throw new LibraryException("PublishDate is required.");
+            throw new LibraryException("PublishDate is required");
 
         if (updatedBook.PublishDate > DateOnly.FromDateTime(DateTime.Now))
-            throw new LibraryException("PublishDate cannot be in the future.");
+            throw new LibraryException("PublishDate cannot be in the future");
 
         existingBook.Title = updatedBook.Title;
         existingBook.Genre = updatedBook.Genre;
@@ -78,7 +75,7 @@ public class BookService : IBookService
         existingBook.Price = updatedBook.Price;
 
         if (updatedBook.DateAdded == default)
-            throw new LibraryException("DateAdded cannot be empty.");
+            throw new LibraryException("DateAdded cannot be empty");
 
         existingBook.DateAdded = updatedBook.DateAdded;
 
@@ -114,7 +111,7 @@ public class BookService : IBookService
 
     public List<BookDamage> GetBookDamages(int bookId)
     {
-        var book = _context.Books.Find(bookId) ?? throw new LibraryException("Book not found");
+        var book = GetBookById(bookId);
         var damages = _context.BookDamages.Where(bd => bd.BookId == bookId).ToList();
         return damages;
     }
@@ -134,7 +131,7 @@ public class BookService : IBookService
         {
             if (damage == null)
             {
-                throw new LibraryException("Invalid damage entry.");
+                throw new LibraryException("Invalid damage entry");
             }
             
             _context.BookDamages.Add(damage);
@@ -158,8 +155,7 @@ public class BookService : IBookService
             newAuthor,
             oldBook.Price
         )
-        {
-            DateAdded = DateOnly.FromDateTime(DateTime.Now) };
+        { DateAdded = DateOnly.FromDateTime(DateTime.Now) };
 
         _context.Books.Add(newBook);
 

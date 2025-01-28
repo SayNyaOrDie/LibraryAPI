@@ -65,7 +65,6 @@ namespace WebApplication3.Data
                     a.Property(p => p.Name).HasColumnName("Author_Name").IsRequired();
                     a.Property(p => p.Surname).HasColumnName("Author_Surname").IsRequired();
                 });
-
         }
     }
 }

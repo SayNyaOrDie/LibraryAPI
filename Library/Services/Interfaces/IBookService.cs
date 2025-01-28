@@ -14,6 +14,7 @@ namespace WebApplication3.Services.Interfaces
         void ReplaceBook(int bookId, BookStatus status);
         List<Book> GetBooksByAuthor(Author author);
         List<BookDamage> GetBookDamages(int bookId);
+        void HandleDamages(IEnumerable<BookDamage> bookDamages);
 
     }
 }

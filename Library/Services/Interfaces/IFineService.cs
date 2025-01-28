@@ -1,7 +1,10 @@
 ﻿using WebApplication3.Models;
 
-public interface IFineService
+namespace WebApplication3.Services.Interfaces
 {
-    decimal CalculateDamageFine(List<BookDamage> damages, decimal bookPrice);
-    decimal CalculateOverdueFine(int daysBorrowed);
+    public interface IFineService
+    {
+        decimal CalculateDamageFine(List<BookDamage> damages, decimal bookPrice);
+        decimal CalculateOverdueFine(int daysBorrowed);
+    }
 }

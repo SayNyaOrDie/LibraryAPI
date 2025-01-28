@@ -3,7 +3,6 @@ using WebApplication3.Models;
 using WebApplication3.Services.Interfaces;
 using WebApplication3.Enums;
 using WebApplication3.Exceptions;
-using Microsoft.Extensions.Options;
 
 public class TransactionService : ITransactionService
 {
@@ -79,15 +78,12 @@ public class TransactionService : ITransactionService
         decimal damageFine = 0m;
         var returnTransaction = new Transaction(visitorId, bookId, returnDate, TransactionStatus.Returned);
         _visitorService.AddTransactionToVisitor(visitorId, returnTransaction);
-        if (damages.Any())
+        if (damages.Count != 0)
         {
-            var bookStatus = damages.Any(d => d.Rate == BookDamageRate.Lost)
-                    ? BookStatus.Lost
-                    : BookStatus.Decommissioned;
 
-            if (bookStatus == BookStatus.Lost)
+            if (damages.Any(d => d.Rate == BookDamageRate.Lost))
             {
-                _bookService.ReplaceBook(bookId, bookStatus);
+                _bookService.ReplaceBook(bookId, BookStatus.Lost);
                 damageFine = book.Price;
                 visitor.AddTransaction(returnTransaction);
                 _context.SaveChanges();
@@ -98,7 +94,7 @@ public class TransactionService : ITransactionService
             
             if (damageFine >= book.Price)
             {
-                _bookService.ReplaceBook(bookId, bookStatus);
+                _bookService.ReplaceBook(bookId, BookStatus.Decommissioned);
                 damageFine = book.Price;
                 visitor.AddTransaction(returnTransaction);
                 _context.SaveChanges();
@@ -116,6 +112,7 @@ public class TransactionService : ITransactionService
         if (book.Status == BookStatus.NotAvailable)
             _bookService.UpdateBookAvailability(bookId, BookStatus.Available);
 
+        _bookService.HandleDamages(damages);
 
         visitor.AddTransaction(returnTransaction);
         _context.SaveChanges();

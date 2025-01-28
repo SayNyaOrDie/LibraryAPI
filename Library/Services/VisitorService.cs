@@ -21,7 +21,7 @@ namespace WebApplication3.Services
                 .Include(v => v.Transactions)
                 .FirstOrDefault(v => v.Id == visitorId);
 
-            return visitor == null ? throw new LibraryException("Visitor with not found") : visitor;
+            return visitor == null ? throw new LibraryException("Visitor not found") : visitor;
         }
 
         public IEnumerable<Visitor> GetAllVisitors()
@@ -40,8 +40,7 @@ namespace WebApplication3.Services
 
         public void UpdateVisitorDetails(int id, Visitor updatedVisitor)
         {
-            var existingVisitor = _context.Visitors.FirstOrDefault(v => v.Id == id) ??
-                throw new LibraryException($"Visitor with ID {id} not found");
+            var existingVisitor = GetVisitorById(id);
             
             existingVisitor.FirstName = updatedVisitor.FirstName;
             existingVisitor.LastName = updatedVisitor.LastName;

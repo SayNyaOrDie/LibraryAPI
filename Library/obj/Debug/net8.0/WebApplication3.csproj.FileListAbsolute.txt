@@ -136,3 +136,4 @@ D:\projects\LibraryAPI\WebApplication3\obj\Debug\net8.0\WebApplication3.pdb
 D:\projects\LibraryAPI\WebApplication3\obj\Debug\net8.0\WebApplication3.genruntimeconfig.cache
 D:\projects\LibraryAPI\WebApplication3\obj\Debug\net8.0\ref\WebApplication3.dll
 D:\projects\LibraryAPI\WebApplication3\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\projects\LibraryAPI\WebApplication3\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

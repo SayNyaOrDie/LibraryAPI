@@ -1,5 +1,7 @@
 ﻿using WebApplication3.Enums;
+using WebApplication3.Exceptions;
 using WebApplication3.Models;
+using WebApplication3.Services.Interfaces;
 
 namespace WebApplication3.Services
 {
@@ -42,7 +44,8 @@ namespace WebApplication3.Services
                 BookDamageRate.Light => bookPrice * lightMultiplier,
                 BookDamageRate.Medium => bookPrice * mediumMultiplier,
                 BookDamageRate.Critical => bookPrice * criticalMultiplier,
-                BookDamageRate.Lost => bookPrice
+                BookDamageRate.Lost => bookPrice,
+                _ => throw new LibraryException($"Unknown damage rate: {damageRate}")
             };
         }
     }
