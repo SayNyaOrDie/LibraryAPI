@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using WebApplication3.Exceptions;
-using System.Text.Json.Serialization;
 
 namespace WebApplication3.Models
 {

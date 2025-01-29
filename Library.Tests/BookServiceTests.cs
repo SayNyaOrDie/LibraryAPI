@@ -1,12 +1,6 @@
 ﻿using WebApplication3.Enums;
 using WebApplication3.Exceptions;
-using WebApplication3.Models;
-using WebApplication3.Services;
 using WebApplication3.Data;
-using Moq;
-using Xunit;
-using System;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication3.Tests

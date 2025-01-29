@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication3.Data;
 using WebApplication3.Services;
 using WebApplication3.Services.Interfaces;
-using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 

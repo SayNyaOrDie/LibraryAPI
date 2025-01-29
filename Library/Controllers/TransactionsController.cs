@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication3.Models;
 using WebApplication3.Services.Interfaces;
-using System.Collections.Generic;
 using WebApplication3.Exceptions;
 using WebApplication3.DTOs;
 using WebApplication3.Enums;
-using Microsoft.Extensions.Logging;
-using System.Linq;
+
 
 namespace WebApplication3.Controllers
 {

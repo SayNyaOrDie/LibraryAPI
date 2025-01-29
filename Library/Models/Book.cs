@@ -2,8 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using WebApplication3.Enums;
 using WebApplication3.Exceptions;
-using WebApplication3.Models;
-using System.Text.Json.Serialization;
 
 public class Book
 {
