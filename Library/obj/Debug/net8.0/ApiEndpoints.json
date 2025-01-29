@@ -100,6 +100,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebApplication3.Controllers.BooksController",
+    "Method": "GetBookDamages",
+    "RelativePath": "api/Books/getBookDamages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebApplication3.Controllers.TransactionsController",
     "Method": "GetTransactionById",
     "RelativePath": "api/Transactions/{id}",

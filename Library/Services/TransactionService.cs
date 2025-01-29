@@ -87,6 +87,8 @@ public class TransactionService : ITransactionService
                 damageFine = book.Price;
                 visitor.AddTransaction(returnTransaction);
                 _context.SaveChanges();
+                _bookService.HandleDamages(damages);
+                _visitorService.AddFineToDebt(visitorId, damageFine);
                 return damageFine;
             }
 
@@ -98,6 +100,8 @@ public class TransactionService : ITransactionService
                 damageFine = book.Price;
                 visitor.AddTransaction(returnTransaction);
                 _context.SaveChanges();
+                _bookService.HandleDamages(damages);
+                _visitorService.AddFineToDebt(visitorId, damageFine);
                 return damageFine;
             }
         }

@@ -90,6 +90,36 @@ namespace WebApplication3.Controllers
             }
         }
 
+        [HttpGet("getBookDamages")]
+        public IActionResult GetBookDamages(int id)
+        {
+            try
+            {
+                if (IsInternetExplorer())
+                    return BadRequest(new { message = "Internet Explorer is not supported. Please use a modern browser." });
+
+
+                _logger.LogInformation("Fetching all book damages.");
+                var bookDamages = _bookService.GetBookDamages(id);
+                if (bookDamages == null)
+                {
+                    _logger.LogWarning("No book damages found.");
+                    return NotFound(new { message = "No book damages found." });
+                }
+                return Ok(bookDamages);
+            }
+            catch (LibraryException ex)
+            {
+                _logger.LogWarning($"Library error while fetching book damages: {ex.Message}");
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Unexpected error while fetching book damages: {ex.Message}");
+                return StatusCode(500, new { message = "An unexpected error occurred", details = ex.Message });
+            }
+        }
+
         [HttpGet("getAllBooks")]
         public IActionResult GetAllBooks()
         {

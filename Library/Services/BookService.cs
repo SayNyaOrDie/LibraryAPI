@@ -3,6 +3,7 @@ using WebApplication3.Exceptions;
 using WebApplication3.Services.Interfaces;
 using WebApplication3.Data;
 using WebApplication3.Models;
+using Newtonsoft.Json.Bson;
 
 public class BookService : IBookService
 {
@@ -111,9 +112,7 @@ public class BookService : IBookService
 
     public List<BookDamage> GetBookDamages(int bookId)
     {
-        var book = GetBookById(bookId);
-        var damages = _context.BookDamages.Where(bd => bd.BookId == bookId).ToList();
-        return damages;
+        return _context.BookDamages.Where(bd => bd.BookId == bookId).ToList();
     }
 
     public void UpdateBookAvailability(int bookId, BookStatus newAvailability)
